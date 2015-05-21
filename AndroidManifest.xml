@@ -1,13 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="se.uu.daftest"
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-    
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:minSdkVersion="19"
+        android:targetSdkVersion="21" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -21,6 +22,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home" >
         </activity>
     </application>
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnClickListener, OnSeekBarChangeListener {
 
+
     static Map<String, Object> stateMap = new HashMap<String, Object>();
 
     DAFProcessor audio = null;
@@ -24,11 +27,24 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
     TextView textStatus = null;
     SeekBar seekBarDelay = null;
     TextView textDelay = null;
+    Button home;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        home = (Button)findViewById(R.id.home);
+		
+		home.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+				startActivity(intent);
+			}
+		});
 
         if (stateMap.containsKey("audio") == false) {
             audio = new DAFProcessor();
@@ -121,5 +137,5 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
     public void onStartTrackingTouch(SeekBar seekBar) {
 
     }
-
+    
 }

@@ -13,5 +13,5 @@ Java_se_uu_daftest_HomeActivity_stringFromJNI( JNIEnv* env,
 {
 
 
-    return (*env)->NewStringUTF(env, "Hello from JNI !  Compiled with ABI .");
+    return (*env)->NewStringUTF(env, "Hello from Jni");
 }

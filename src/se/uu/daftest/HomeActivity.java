@@ -8,18 +8,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class HomeActivity extends Activity {
 
+	TextView textview;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		
-		
-		
+		//Auditory audio = new Auditory();
+		textview = (TextView)findViewById(R.id.textview);
         String hello = stringFromJNI();
-        new AlertDialog.Builder(this).setMessage(hello).show();
+        textview.setText(hello);
+        //new AlertDialog.Builder(this).setMessage(hello).show();
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class HomeActivity extends Fragment {
 		/*super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		
-		//Auditory audio = new Auditory();
+		
 		textview = (TextView)findViewById(R.id.textview);
         String hello = stringFromJNI();
         textview.setText(hello);

@@ -50,8 +50,15 @@ public class Auditory extends Thread
             { 
                 Log.i("Map", "Writing new data to buffer");
                 short[] buffer = buffers[ix++ % buffers.length];
+                //start time
+                long startTime = System.currentTimeMillis();
                 N = recorder.read(buffer,0,buffer.length);
+                
                 track.write(buffer, 0, buffer.length);
+              //end time
+                long endTime = System.currentTimeMillis();
+                
+                System.out.println(endTime-startTime);
             }
         }
         catch(Throwable x)

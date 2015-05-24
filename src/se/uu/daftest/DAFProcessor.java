@@ -16,6 +16,8 @@ public class DAFProcessor implements Runnable {
     private static final int MAX_DEALY = 1000;
 
     private static final int MIN_DEALY = 0;
+    
+    public static long realDelay=0;
 
     /**
      * This is set to true if DAF processing is active
@@ -210,11 +212,19 @@ public class DAFProcessor implements Runnable {
                     writeOffset = bufWriteOffset;
                     readOffset = bufReadOffset;
                 }
-                System.out.println(System.currentTimeMillis() + "   reaaaadd");
+                //start time
+               // long startTime = System.currentTimeMillis();
                 N = recorder.read(dataBuffer, writeOffset, bufRWSize);
+                
                 if (N != AudioRecord.ERROR_INVALID_OPERATION || N != AudioRecord.ERROR_BAD_VALUE) {
+                	
                     track.write(dataBuffer, readOffset, bufRWSize);
-                    System.out.println(System.currentTimeMillis() + "   writee");
+                    //end time
+                    //long endTime = System.currentTimeMillis();
+                    
+                    //display
+                    //System.out.println(endTime-startTime);
+                    
                     synchronized (lockObject) {
                         bufWriteOffset += bufRWSize;
                         bufReadOffset += bufRWSize;
@@ -288,5 +298,6 @@ public class DAFProcessor implements Runnable {
     public static int GetMinDealy() {
         return MIN_DEALY;
     }
+   
 
 }

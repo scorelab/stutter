@@ -15,10 +15,11 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter {
     switch (i) {
         case 0:
             //Fragement for Android Tab
-            return new HomeActivity();
+            return new MainActivity();
         case 1:
            //Fragment for Ios Tab
-            return new MainActivityFragment();
+        	   return new HomeActivity();
+            
         }
     return null;
  

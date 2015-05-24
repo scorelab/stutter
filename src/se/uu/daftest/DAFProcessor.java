@@ -210,10 +210,11 @@ public class DAFProcessor implements Runnable {
                     writeOffset = bufWriteOffset;
                     readOffset = bufReadOffset;
                 }
-
+                System.out.println(System.currentTimeMillis() + "   reaaaadd");
                 N = recorder.read(dataBuffer, writeOffset, bufRWSize);
                 if (N != AudioRecord.ERROR_INVALID_OPERATION || N != AudioRecord.ERROR_BAD_VALUE) {
                     track.write(dataBuffer, readOffset, bufRWSize);
+                    System.out.println(System.currentTimeMillis() + "   writee");
                     synchronized (lockObject) {
                         bufWriteOffset += bufRWSize;
                         bufReadOffset += bufRWSize;

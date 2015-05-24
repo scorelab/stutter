@@ -3,6 +3,7 @@ package se.uu.daftest;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -33,6 +34,8 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+       
         
         home = (Button)findViewById(R.id.home);
 		
@@ -85,6 +88,7 @@ public class MainActivity extends Activity implements OnClickListener, OnSeekBar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
+        
         return true;
     }
 

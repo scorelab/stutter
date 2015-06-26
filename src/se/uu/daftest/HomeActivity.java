@@ -25,6 +25,9 @@ public class HomeActivity extends Fragment {
 		// TODO Auto-generated method stub
     	View home = inflater.inflate(R.layout.activity_home,container,false);
     	
+    	createEngine();
+    	createBufferQueueAudioPlayer();
+    	
     	recordButton 	= (Button)home.findViewById(R.id.recordButton);
     	playButton		= (Button)home.findViewById(R.id.playButton);
     	
@@ -34,13 +37,16 @@ public class HomeActivity extends Fragment {
 			public void onClick(View v) {
 				//call native method
 				if(!created){
-					created = createAudioRecoder();
+					created = createAudioRecorder();
+					
 				}
 				if(created){
 					startRecording();
 				}
 			}
 		});
+    	
+    	
     	
     	playButton.setOnClickListener(new OnClickListener() {
 			
@@ -56,8 +62,9 @@ public class HomeActivity extends Fragment {
     
 
     //call to invoke native method
-	public native String stringFromJNI();
-	public static native boolean createAudioRecoder();
+    public static native void createEngine();
+    public static native void createBufferQueueAudioPlayer();
+	public static native boolean createAudioRecorder();
 	public static native void startRecording();
 	public static native void selectClip(int which, int count);
 

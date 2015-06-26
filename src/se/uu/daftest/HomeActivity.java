@@ -9,37 +9,59 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class HomeActivity extends Fragment {
 
-	TextView textview;
-	
-	
-		/*super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home);
+	Button recordButton;
+	Button playButton;
 		
-		
-		textview = (TextView)findViewById(R.id.textview);
-        String hello = stringFromJNI();
-        textview.setText(hello);
-        //new AlertDialog.Builder(this).setMessage(hello).show();
-	}*/
-
-	
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
     	View home = inflater.inflate(R.layout.activity_home,container,false);
-    	textview = (TextView)home.findViewById(R.id.textview);
+    	
+    	recordButton 	= (Button)home.findViewById(R.id.recordButton);
+    	playButton		= (Button)home.findViewById(R.id.playButton);
+    	
+    	recordButton.setOnClickListener(new OnClickListener() {
+			Boolean created = false;
+			@Override
+			public void onClick(View v) {
+				//call native method
+				if(!created){
+					created = createAudioRecoder();
+				}
+				if(created){
+					startRecording();
+				}
+			}
+		});
+    	
+    	playButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				selectClip(4,1);
+			}
+		});
+    	
 		return home;
 	}
+    
 
+    //call to invoke native method
 	public native String stringFromJNI();
-	
+	public static native boolean createAudioRecoder();
+	public static native void startRecording();
+	public static native void selectClip(int which, int count);
+
+	//Reference to the C library
 	static {
 	    System.loadLibrary("daf");
 	  }

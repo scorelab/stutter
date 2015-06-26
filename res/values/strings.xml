@@ -2,11 +2,13 @@
 <resources>
 
     <string name="app_name">Stutter Aid</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="test_button">Test Button</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">DAF App</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_pager">PagerActivity</string>
+    <string name="play">Play</string>
+    <string name="record">Record</string>
 
 </resources>

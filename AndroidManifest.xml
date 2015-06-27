@@ -3,8 +3,12 @@
     package="se.uu.daftest"
     android:versionCode="1"
     android:versionName="1.0" >
+    
+    <!-- RECORD_AUDIO is needed to create an audio recorder -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- MODIFY_AUDIO_SETTINGS is needed to use audio effects-->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"></uses-permission>
 
     <uses-sdk
         android:minSdkVersion="19"

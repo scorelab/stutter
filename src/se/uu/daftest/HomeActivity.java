@@ -53,7 +53,7 @@ public class HomeActivity extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				selectClip(4,1);
+				selectClip(4,5);
 			}
 		});
     	

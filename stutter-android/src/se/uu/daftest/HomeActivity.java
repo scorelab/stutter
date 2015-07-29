@@ -18,6 +18,8 @@ public class HomeActivity extends Fragment {
 
 	Button recordButton;
 	Button playButton;
+	Thread recordThread;
+	Thread playThread;
 		
     @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,6 +29,20 @@ public class HomeActivity extends Fragment {
     	
     	createEngine();
     	createBufferQueueAudioPlayer();
+    	
+    	recordThread = new Thread(){
+    		public void run() {
+				setPriority(Thread.MAX_PRIORITY);
+				startRecording();
+			}
+    	};
+    	
+    	playThread = new Thread(){
+    		public void run() {
+				setPriority(Thread.MAX_PRIORITY);
+				selectClip(4);
+			}
+    	};
     	
     	recordButton 	= (Button)home.findViewById(R.id.recordButton);
     	playButton		= (Button)home.findViewById(R.id.playButton);
@@ -41,7 +57,7 @@ public class HomeActivity extends Fragment {
 					
 				}
 				if(created){
-					startRecording();
+					recordThread.start();
 				}
 			}
 		});
@@ -53,7 +69,7 @@ public class HomeActivity extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				selectClip(4,1);
+				playThread.start();
 			}
 		});
     	
@@ -66,7 +82,7 @@ public class HomeActivity extends Fragment {
     public static native void createBufferQueueAudioPlayer();
 	public static native boolean createAudioRecorder();
 	public static native void startRecording();
-	public static native void selectClip(int which, int count);
+	public static native void selectClip(int which);
 
 	//Reference to the C library
 	static {

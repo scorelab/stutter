@@ -1,10 +1,13 @@
 package se.uu.daftest;
 
+import java.io.FileOutputStream;
+
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.MediaRecorder.AudioSource;
+import android.os.Environment;
 import android.util.Log;
 
 public class DAFProcessor implements Runnable {
@@ -89,6 +92,12 @@ public class DAFProcessor implements Runnable {
      * The size of data to be read or written from/to buffer at a time.
      */
     int bufRWSize = 512;
+    
+    /**
+     * File output stream
+     */
+    FileOutputStream os=null;
+     
 
     public DAFProcessor() {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
@@ -185,13 +194,13 @@ public class DAFProcessor implements Runnable {
             track = new AudioTrack(AudioManager.STREAM_MUSIC, sampleRate, AudioFormat.CHANNEL_OUT_MONO,
                                    AudioFormat.ENCODING_PCM_16BIT, playMinBufSize,
                                    AudioTrack.MODE_STREAM);
-
             recorder.startRecording();
             track.play();
 
             int N = 0;
             int writeOffset = 0;
             int readOffset = 0;
+            os = new FileOutputStream(Environment.getExternalStorageDirectory().getAbsolutePath()+'/'+"ab.wav");
             while (isActive == true) {
 
                 synchronized (lockObject) {
@@ -219,6 +228,7 @@ public class DAFProcessor implements Runnable {
                 if (N != AudioRecord.ERROR_INVALID_OPERATION || N != AudioRecord.ERROR_BAD_VALUE) {
                 	
                     track.write(dataBuffer, readOffset, bufRWSize);
+                    os.write(short2byte(dataBuffer), readOffset, bufRWSize);
                     //end time
                     //long endTime = System.currentTimeMillis();
                     
@@ -231,6 +241,7 @@ public class DAFProcessor implements Runnable {
                     }
                 }
             }
+            os.close();
 
         } catch (Throwable x) {
             Log.w(this.getClass().getName(), "Error reading voice audio", x);
@@ -297,6 +308,18 @@ public class DAFProcessor implements Runnable {
      */
     public static int GetMinDealy() {
         return MIN_DEALY;
+    }
+    
+    private byte[] short2byte(short[] sData) {
+        int shortArrsize = sData.length;
+        byte[] bytes = new byte[shortArrsize * 2];
+        for (int i = 0; i < shortArrsize; i++) {
+            bytes[i * 2] = (byte) (sData[i] & 0x00FF);
+            bytes[(i * 2) + 1] = (byte) (sData[i] >> 8);
+            sData[i] = 0;
+        }
+        return bytes;
+
     }
    
 

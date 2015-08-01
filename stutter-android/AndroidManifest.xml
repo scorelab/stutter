@@ -9,6 +9,9 @@
 
     <!-- MODIFY_AUDIO_SETTINGS is needed to use audio effects-->
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"></uses-permission>
+    
+    <!-- File write permissions -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-sdk
         android:minSdkVersion="19"

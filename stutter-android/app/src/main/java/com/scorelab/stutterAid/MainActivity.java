@@ -1,9 +1,8 @@
-package com.superpowered.frequencydomain;
+package com.scorelab.stutterAid;
 
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.MediaRecorder;
 import android.os.*;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.superpowered.frequencydomain;
+package com.scorelab.stutterAid;
 
 import android.media.MediaRecorder;
 import android.os.Environment;

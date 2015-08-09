@@ -41,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
                     StopRecord();
                 }
                 else {
-                    btn.setText("stop");
-                    buttonPressed = 1;
+
                     AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
                     if (am.isBluetoothA2dpOn() || am.isWiredHeadsetOn()) {
+                        btn.setText("stop");
+                        buttonPressed = 1;
                         if (isFirst==0){
                             StartRecord();
                         }

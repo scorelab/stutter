@@ -4,14 +4,21 @@
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
-            android:name="com.scorelab.stutterAid.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +27,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.scorelab.stutterAid.TestDataActivity"
+            android:name=".TestDataActivity"
             android:label="@string/title_activity_test_data" >
+        </activity>
+        <activity
+            android:name=".GPlusLogin"
+            android:label="@string/title_activity_gplus_login" >
         </activity>
     </application>
 

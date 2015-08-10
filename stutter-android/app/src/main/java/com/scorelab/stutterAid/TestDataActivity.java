@@ -2,12 +2,14 @@ package com.scorelab.stutterAid;
 
 import android.media.MediaRecorder;
 import android.os.Environment;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ public class TestDataActivity extends AppCompatActivity {
     int isPressed=0;
     final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
     MediaRecorder myAudioRecorder;
+    Chronometer chronometer;
     String filename;
 
     @Override
@@ -26,9 +29,10 @@ public class TestDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_data);
 
         final EditText et_filename = (EditText)findViewById(R.id.editText);
+        chronometer=(Chronometer)findViewById(R.id.chronometer);
 
 
-        Button btnTest =(Button)findViewById(R.id.btn_start_test);
+        final Button btnTest =(Button)findViewById(R.id.btn_start_test);
 
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,12 +41,16 @@ public class TestDataActivity extends AppCompatActivity {
                 System.out.println(filename);
                 if(isPressed==1){
                     isPressed=0;
+                    btnTest.setText("Start");
+                    chronometer.stop();
                     myAudioRecorder.stop();
                 }
                 else{
                     if(!filename.equals("")) {
 
                         isPressed = 1;
+                        btnTest.setText("stop");
+                        chronometer.start();
                         myAudioRecorder = new MediaRecorder();
                         myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                         myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);

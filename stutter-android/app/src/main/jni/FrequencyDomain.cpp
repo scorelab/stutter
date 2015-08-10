@@ -52,12 +52,12 @@ static bool audioProcessing(void *clientdata, short int *audioInputOutput, int n
 
 // Ugly Java-native bridges - JNI, that is.
 extern "C" {
-    JNIEXPORT void Java_com_superpowered_frequencydomain_MainActivity_FrequencyDomain(JNIEnv *javaEnvironment, jobject self, jlong samplerate, jlong buffersize);
-    JNIEXPORT void Java_com_superpowered_frequencydomain_MainActivity_StopRecord(JNIEnv *javaEnvironment, jobject self);
-    JNIEXPORT void Java_com_superpowered_frequencydomain_MainActivity_StartRecord(JNIEnv *javaEnvironment, jobject self);
+    JNIEXPORT void Java_com_scorelab_stutterAid_MainActivity_FrequencyDomain(JNIEnv *javaEnvironment, jobject self, jlong samplerate, jlong buffersize);
+    JNIEXPORT void Java_com_scorelab_stutterAid_MainActivity_StopRecord(JNIEnv *javaEnvironment, jobject self);
+    JNIEXPORT void Java_com_scorelab_stutterAid_MainActivity_StartRecord(JNIEnv *javaEnvironment, jobject self);
 }
 
-JNIEXPORT void Java_com_superpowered_frequencydomain_MainActivity_FrequencyDomain(JNIEnv *javaEnvironment, jobject self, jlong samplerate, jlong buffersize) {
+JNIEXPORT void Java_com_scorelab_stutterAid__MainActivity_FrequencyDomain(JNIEnv *javaEnvironment, jobject self, jlong samplerate, jlong buffersize) {
     frequencyDomain = new SuperpoweredFrequencyDomain(FFT_LOG_SIZE); // This will do the main "magic".
     stepSize = frequencyDomain->fftSize / 4; // The default overlap ratio is 4:1, so we will receive this amount of samples from the frequency domain in one step.
 
@@ -78,10 +78,10 @@ JNIEXPORT void Java_com_superpowered_frequencydomain_MainActivity_FrequencyDomai
 
 }
 
-JNIEXPORT void Java_com_superpowered_frequencydomain_MainActivity_StopRecord(JNIEnv *javaEnvironment, jobject self){
+JNIEXPORT void Java_com_scorelab_stutterAid_MainActivity_StopRecord(JNIEnv *javaEnvironment, jobject self){
     audioIO->stop();
 }
 
-JNIEXPORT void Java_com_superpowered_frequencydomain_MainActivity_StartRecord(JNIEnv *javaEnvironment, jobject self){
+JNIEXPORT void Java_com_scorelab_stutterAid_MainActivity_StartRecord(JNIEnv *javaEnvironment, jobject self){
     audioIO->start();
 }

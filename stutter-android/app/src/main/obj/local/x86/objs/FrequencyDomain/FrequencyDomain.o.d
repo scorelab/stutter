@@ -1,5 +1,5 @@
-I:/STUTTER/project/stutter/stutter-android/app/src/main/obj/local/x86/objs/FrequencyDomain/FrequencyDomain.o: \
-  I:/STUTTER/project/stutter/stutter-android/app/src/main/jni/FrequencyDomain.cpp \
+I:/STUTTER/stutter/stutter-android/app/src/main/obj/local/x86/objs/FrequencyDomain/FrequencyDomain.o: \
+  I:/STUTTER/stutter/stutter-android/app/src/main/jni/FrequencyDomain.cpp \
   E:/Android/android-ndk/platforms/android-9/arch-x86/usr/include\jni.h \
   E:/Android/android-ndk/platforms/android-9/arch-x86/usr/include\sys/cdefs.h \
   E:/Android/android-ndk/platforms/android-9/arch-x86/usr/include\sys/cdefs_elf.h \

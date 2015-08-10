@@ -1,5 +1,5 @@
-I:/STUTTER/project/stutter/stutter-android/app/src/main/obj/local/arm64-v8a/objs/FrequencyDomain/Superpowered/SuperpoweredAndroidAudioIO.o: \
-  I:/STUTTER/project/stutter/stutter-android/app/src/main/jni/Superpowered/SuperpoweredAndroidAudioIO.cpp \
+I:/STUTTER/stutter/stutter-android/app/src/main/obj/local/arm64-v8a/objs/FrequencyDomain/Superpowered/SuperpoweredAndroidAudioIO.o: \
+  I:/STUTTER/stutter/stutter-android/app/src/main/jni/Superpowered/SuperpoweredAndroidAudioIO.cpp \
   Superpowered/SuperpoweredAndroidAudioIO.h \
   E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\android/log.h \
   E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\SLES/OpenSLES.h \

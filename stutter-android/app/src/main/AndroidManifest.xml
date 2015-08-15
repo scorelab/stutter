@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.scorelab.stutterAid" >
+    package="com.scorelab.stutteraid" >
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,10 +13,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.NoActionBar" >
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -29,10 +25,6 @@
         <activity
             android:name=".TestDataActivity"
             android:label="@string/title_activity_test_data" >
-        </activity>
-        <activity
-            android:name=".GPlusLogin"
-            android:label="@string/title_activity_gplus_login" >
         </activity>
     </application>
 

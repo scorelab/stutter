@@ -1,8 +1,7 @@
-package com.scorelab.stutterAid;
+package com.scorelab.stutteraid;
 
 import android.media.MediaRecorder;
 import android.os.Environment;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class TestDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_data);
 
         final EditText et_filename = (EditText)findViewById(R.id.editText);
-        chronometer=(Chronometer)findViewById(R.id.chronometer);
+        final TextView tv_state = (TextView)findViewById(R.id.textView3);
 
 
         final Button btnTest =(Button)findViewById(R.id.btn_start_test);
@@ -39,31 +39,31 @@ public class TestDataActivity extends AppCompatActivity {
             public void onClick(View v) {
                 filename = et_filename.getText().toString();
                 System.out.println(filename);
-                if(isPressed==1){
-                    isPressed=0;
+                if (isPressed == 1) {
+                    isPressed = 0;
                     btnTest.setText("Start");
-                    chronometer.stop();
                     myAudioRecorder.stop();
-                }
-                else{
-                    if(!filename.equals("")) {
+                    et_filename.setText("");
+                    Toast.makeText(getApplicationContext(), "File saved as " + filename + ".mp3",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    if (!filename.equals("")) {
 
                         isPressed = 1;
                         btnTest.setText("stop");
-                        chronometer.start();
                         myAudioRecorder = new MediaRecorder();
                         myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                         myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                         myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-                        myAudioRecorder.setOutputFile(outputFile+"/"+filename+".mp3");
+                        myAudioRecorder.setOutputFile(outputFile + "/" + filename + ".mp3");
+                        tv_state.setText("Recodring started....");
                         try {
                             myAudioRecorder.prepare();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         myAudioRecorder.start();
-                    }
-                    else{
+                    } else {
                         Toast.makeText(getApplicationContext(), "Give a file name",
                                 Toast.LENGTH_LONG).show();
                     }

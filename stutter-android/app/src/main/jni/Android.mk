@@ -1,5 +1,5 @@
 LOCAL_PATH := $(call my-dir)
-SUPERPOWERED_PATH := Superpowered
+SUPERPOWERED_PATH := ./Superpowered
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := Superpowered

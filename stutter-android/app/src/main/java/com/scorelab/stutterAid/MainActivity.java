@@ -1,16 +1,16 @@
-package com.scorelab.stutterAid;
+package com.scorelab.stutteraid;
 
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.os.*;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        System.loadLibrary("FrequencyDomain");
         DAF daf = new DAF();
         final Thread thread =  new Thread(daf);
         thread.setPriority(Thread.MAX_PRIORITY);
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
     public class DAF implements Runnable{
 
         public DAF(){
-           // android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
+            // android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
         }
 
         @Override

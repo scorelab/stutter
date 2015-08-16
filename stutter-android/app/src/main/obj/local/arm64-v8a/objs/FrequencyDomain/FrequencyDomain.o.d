@@ -1,5 +1,5 @@
-I:/STUTTER/project/stutter/stutter-android/app/src/main/obj/local/arm64-v8a/objs/FrequencyDomain/FrequencyDomain.o: \
-  I:/STUTTER/project/stutter/stutter-android/app/src/main/jni/FrequencyDomain.cpp \
+I:/STUTTER/StutterAid/app/src/main/obj/local/arm64-v8a/objs/FrequencyDomain/FrequencyDomain.o: \
+  I:/STUTTER/StutterAid/app/src/main/jni/FrequencyDomain.cpp \
   E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\jni.h \
   E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\sys/cdefs.h \
   E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\sys/cdefs_elf.h \
@@ -29,8 +29,7 @@ I:/STUTTER/project/stutter/stutter-android/app/src/main/obj/local/arm64-v8a/objs
   Superpowered\SuperpoweredFrequencyDomain.h \
   Superpowered/SuperpoweredAudioBuffers.h \
   Superpowered\SuperpoweredAndroidAudioIO.h \
-  Superpowered\SuperpoweredSimple.h Superpowered\SuperpoweredRecorder.h \
-  E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\stdio.h
+  Superpowered\SuperpoweredSimple.h
 
 E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\jni.h:
 
@@ -91,7 +90,3 @@ Superpowered/SuperpoweredAudioBuffers.h:
 Superpowered\SuperpoweredAndroidAudioIO.h:
 
 Superpowered\SuperpoweredSimple.h:
-
-Superpowered\SuperpoweredRecorder.h:
-
-E:/Android/android-ndk/platforms/android-21/arch-arm64/usr/include\stdio.h:

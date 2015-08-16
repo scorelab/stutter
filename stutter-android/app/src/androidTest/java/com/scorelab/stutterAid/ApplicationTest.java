@@ -1,4 +1,4 @@
-package com.superpowered.frequencydomain;
+package com.scorelab.stutteraid;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

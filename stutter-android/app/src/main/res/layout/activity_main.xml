@@ -12,15 +12,6 @@
         android:text="start"
         android:id="@+id/btn_start"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/btn_test_activity"
-        android:layout_alignEnd="@+id/btn_test_activity" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test Data"
-        android:id="@+id/btn_test_activity"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <LinearLayout
@@ -46,6 +37,59 @@
                 android:fontFamily="sans-serif-light"
                 android:layout_centerHorizontal="true"
                 android:textColor="#ffffff"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score_long"
+                android:id="@+id/textView"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="53dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Survey"
+                android:id="@+id/btn_test_activity"
+                android:layout_below="@+id/textView2"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:layout_alignParentLeft="false"
+                android:text="@string/help_us"
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </LinearLayout>
 

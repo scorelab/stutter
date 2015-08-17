@@ -1,75 +1,123 @@
 package com.scorelab.stutteraid;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+
 
 public class TestDataActivity extends AppCompatActivity {
 
     int isPressed=0;
     final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
     MediaRecorder myAudioRecorder;
-    Chronometer chronometer;
     String filename;
+    String uuid;
+    int seconds;
+    HttpClient httpclient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_data);
 
-        final EditText et_filename = (EditText)findViewById(R.id.editText);
         final TextView tv_state = (TextView)findViewById(R.id.textView3);
-
-
         final Button btnTest =(Button)findViewById(R.id.btn_start_test);
+        TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+
+        uuid = tManager.getDeviceId();
+        Calendar c = Calendar.getInstance();
+        seconds = c.get(Calendar.SECOND);
+        filename =  uuid+seconds;
 
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filename = et_filename.getText().toString();
-                System.out.println(filename);
                 if (isPressed == 1) {
                     isPressed = 0;
                     btnTest.setText("Start");
                     myAudioRecorder.stop();
-                    et_filename.setText("");
                     Toast.makeText(getApplicationContext(), "File saved as " + filename + ".mp3",
                             Toast.LENGTH_LONG).show();
+                    createAndShowAlertDialog();
                 } else {
-                    if (!filename.equals("")) {
 
-                        isPressed = 1;
-                        btnTest.setText("stop");
-                        myAudioRecorder = new MediaRecorder();
-                        myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                        myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                        myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-                        myAudioRecorder.setOutputFile(outputFile + "/" + filename + ".mp3");
-                        tv_state.setText("Recodring started....");
-                        try {
-                            myAudioRecorder.prepare();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        myAudioRecorder.start();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Give a file name",
-                                Toast.LENGTH_LONG).show();
+
+                    isPressed = 1;
+                    btnTest.setText("stop");
+                    myAudioRecorder = new MediaRecorder();
+                    myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+                    myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+                    myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
+                    myAudioRecorder.setOutputFile(outputFile + "/" + filename + ".mp3");
+                    tv_state.setText("Recodring started....");
+                    try {
+                        myAudioRecorder.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    myAudioRecorder.start();
                 }
             }
         });
+    }
+
+    private void createAndShowAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(TestDataActivity.this);
+        builder.setTitle("File saved. Do you want to upload this to our servers?");
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                uploadFile();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                //TODO
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void uploadFile(){
+        try {
+            File file = new File(outputFile + "/" + filename + ".mp3");
+
+            httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://httpbin.org/post");
+            MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+            multipartEntity.addPart("Image", new FileBody(file));
+            httppost.setEntity(multipartEntity);
+
+            String respond = String.valueOf(httpclient.execute(httppost));
+            System.out.println(respond);
+
+        } catch (Exception e) {
+            // show error
+        }
     }
 
     @Override

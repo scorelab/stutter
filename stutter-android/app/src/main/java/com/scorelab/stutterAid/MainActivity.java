@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
             samplerateString = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE);
             buffersizeString = audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER);
         }
-        if(samplerateString==null) samplerateString= "44100";
-        if(buffersizeString==null) buffersizeString = "128";
+        samplerateString= "44100";
+        buffersizeString = "256";
 
         System.loadLibrary("FrequencyDomain");
         FrequencyDomain(Integer.parseInt(samplerateString), Integer.parseInt(buffersizeString));

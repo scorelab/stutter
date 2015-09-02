@@ -14,13 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -34,7 +27,6 @@ public class TestDataActivity extends AppCompatActivity {
     String filename;
     String uuid;
     int seconds;
-    HttpClient httpclient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,18 +95,10 @@ public class TestDataActivity extends AppCompatActivity {
 
     private void uploadFile(){
         try {
+            String fileName = outputFile + "/" + filename + ".mp3";
             File file = new File(outputFile + "/" + filename + ".mp3");
-
-            httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://httpbin.org/post");
-            MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
-            multipartEntity.addPart("Image", new FileBody(file));
-            httppost.setEntity(multipartEntity);
-
-            String respond = String.valueOf(httpclient.execute(httppost));
-            System.out.println(respond);
-
+            UploadHandler uploadHandler = new UploadHandler(fileName);
+            uploadHandler.execute("http://172.20.5.61:8080/uploadServer/upload.php");
         } catch (Exception e) {
             // show error
         }

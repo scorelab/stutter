@@ -24,7 +24,7 @@ public class TestDataActivity extends AppCompatActivity {
     int isPressed=0;
     final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
     MediaRecorder myAudioRecorder;
-    String filename;
+    String fileName;
     String uuid;
     int seconds;
 
@@ -40,7 +40,7 @@ public class TestDataActivity extends AppCompatActivity {
         uuid = tManager.getDeviceId();
         Calendar c = Calendar.getInstance();
         seconds = c.get(Calendar.SECOND);
-        filename =  uuid+seconds;
+        fileName =  uuid+seconds;
 
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +48,9 @@ public class TestDataActivity extends AppCompatActivity {
                 if (isPressed == 1) {
                     isPressed = 0;
                     btnTest.setText("Start");
+                    tv_state.setText("Press Start");
                     myAudioRecorder.stop();
-                    Toast.makeText(getApplicationContext(), "File saved as " + filename + ".mp3",
+                    Toast.makeText(getApplicationContext(), "File saved as " + fileName + ".mp3",
                             Toast.LENGTH_LONG).show();
                     createAndShowAlertDialog();
                 } else {
@@ -61,7 +62,7 @@ public class TestDataActivity extends AppCompatActivity {
                     myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                     myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                     myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-                    myAudioRecorder.setOutputFile(outputFile + "/" + filename + ".mp3");
+                    myAudioRecorder.setOutputFile(outputFile + "/" + fileName + ".mp3");
                     tv_state.setText("Recodring started....");
                     try {
                         myAudioRecorder.prepare();
@@ -95,9 +96,9 @@ public class TestDataActivity extends AppCompatActivity {
 
     private void uploadFile(){
         try {
-            String fileName = outputFile + "/" + filename + ".mp3";
-            File file = new File(outputFile + "/" + filename + ".mp3");
-            UploadHandler uploadHandler = new UploadHandler(fileName);
+            String filePath = outputFile + "/" + fileName + ".mp3";
+            File file = new File(outputFile + "/" + fileName + ".mp3");
+            UploadHandler uploadHandler = new UploadHandler(filePath,fileName);
             uploadHandler.execute("http://172.20.5.61:8080/uploadServer/upload.php");
         } catch (Exception e) {
             // show error

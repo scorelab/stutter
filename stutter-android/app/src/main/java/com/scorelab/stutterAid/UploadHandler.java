@@ -27,9 +27,11 @@ public class UploadHandler extends AsyncTask<String,Void,Void> {
     byte[] buffer;
     int maxBufferSize = 1 * 1024 * 1024;
     File file;
+    String fileName;
 
-    public UploadHandler(String filePath)
+    public UploadHandler(String filePath,String fileName)
     {
+        this.fileName = fileName;
         this.file = new File(filePath);
     }
 
@@ -55,13 +57,13 @@ public class UploadHandler extends AsyncTask<String,Void,Void> {
             conn.setRequestProperty("Connection", "Keep-Alive");
             conn.setRequestProperty("ENCTYPE", "multipart/form-data");
             conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-            conn.setRequestProperty("uploaded_file", "audioFile");
+            conn.setRequestProperty("uploaded_file", fileName + ".mp3");
 
             dos = new DataOutputStream(conn.getOutputStream());
 
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name='uploaded_file';filename='"
-                            + "audioFile" + "'" + lineEnd);
+                            + fileName + ".mp3" + "'" + lineEnd);
 
                     dos.writeBytes(lineEnd);
 

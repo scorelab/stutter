@@ -14,13 +14,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -31,10 +24,9 @@ public class TestDataActivity extends AppCompatActivity {
     int isPressed=0;
     final String outputFile = Environment.getExternalStorageDirectory().getAbsolutePath();
     MediaRecorder myAudioRecorder;
-    String filename;
+    String fileName;
     String uuid;
     int seconds;
-    HttpClient httpclient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +40,7 @@ public class TestDataActivity extends AppCompatActivity {
         uuid = tManager.getDeviceId();
         Calendar c = Calendar.getInstance();
         seconds = c.get(Calendar.SECOND);
-        filename =  uuid+seconds;
+        fileName =  uuid+seconds;
 
         btnTest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,8 +48,9 @@ public class TestDataActivity extends AppCompatActivity {
                 if (isPressed == 1) {
                     isPressed = 0;
                     btnTest.setText("Start");
+                    tv_state.setText("Press Start");
                     myAudioRecorder.stop();
-                    Toast.makeText(getApplicationContext(), "File saved as " + filename + ".mp3",
+                    Toast.makeText(getApplicationContext(), "File saved as " + fileName + ".mp3",
                             Toast.LENGTH_LONG).show();
                     createAndShowAlertDialog();
                 } else {
@@ -69,7 +62,7 @@ public class TestDataActivity extends AppCompatActivity {
                     myAudioRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
                     myAudioRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
                     myAudioRecorder.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB);
-                    myAudioRecorder.setOutputFile(outputFile + "/" + filename + ".mp3");
+                    myAudioRecorder.setOutputFile(outputFile + "/" + fileName + ".mp3");
                     tv_state.setText("Recodring started....");
                     try {
                         myAudioRecorder.prepare();
@@ -103,18 +96,10 @@ public class TestDataActivity extends AppCompatActivity {
 
     private void uploadFile(){
         try {
-            File file = new File(outputFile + "/" + filename + ".mp3");
-
-            httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://httpbin.org/post");
-            MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
-
-            multipartEntity.addPart("Image", new FileBody(file));
-            httppost.setEntity(multipartEntity);
-
-            String respond = String.valueOf(httpclient.execute(httppost));
-            System.out.println(respond);
-
+            String filePath = outputFile + "/" + fileName + ".mp3";
+            File file = new File(outputFile + "/" + fileName + ".mp3");
+            UploadHandler uploadHandler = new UploadHandler(filePath,fileName);
+            uploadHandler.execute("http://172.20.5.61:8080/uploadServer/upload.php");
         } catch (Exception e) {
             // show error
         }

@@ -53,6 +53,4 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
-    compile files('libs/apache-mime4j-0.6.jar')
-    compile files('libs/org.apache.httpcomponents.httpclient_4.5.jar')
 }

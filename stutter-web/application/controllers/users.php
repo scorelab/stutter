@@ -20,9 +20,30 @@ class Users extends CI_Controller {
 	 */
 	public function login()
 	{
-		$this->load->view('header');
-		$this->load->view('login');
-		$this->load->view('footer');
+		if(!$this->session->userdata('user_id'))
+		{
+			if($_POST)
+			{
+				$this->load->model('User');
+				$result = $this->User->validate_user();
+				if($result)
+				{
+					$this->session->set_userdata(array(
+						'user_id'=> $result));
+					redirect('/home/');
+				}
+			}
+			else
+			{
+				$this->load->view('header');
+				$this->load->view('login');
+				$this->load->view('footer');	
+			}
+		}
+		else
+		{
+			redirect('/home');
+		}
 	}
 
 }

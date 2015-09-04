@@ -17,9 +17,9 @@ class User extends CI_Model
         );
         $this->db->where($user);
         $query = $this->db->get('users');
-        if($query->result()[0]->id)
+        if($query->result())
         {
-            return $query->result()[0]->imei;
+            return $query->result()[0]->id;
         }
         else
         {

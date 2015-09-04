@@ -1,6 +1,7 @@
 <?php
 //Model for handling users     
-class User extends CI_Model {
+class User extends CI_Model 
+{
 
     function __construct()
     {

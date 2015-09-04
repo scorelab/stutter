@@ -35,5 +35,14 @@ class Home extends CI_Controller {
 			redirect('users/login');
 		}
 	}
+	
+	public function play($file_name)
+	{
+		$fileloc = 'audio.mp3';
+		header('Content-type: audio/mpeg');
+		header("Content-disposition: inline; filename=$filename");
+		header('Content-Length:'.filesize($fileloc));
+		readfile('uploads/'.$file_name);
+	}
 
 }

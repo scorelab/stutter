@@ -19,7 +19,7 @@ class User extends CI_Model
         $query = $this->db->get('users');
         if($query->result())
         {
-            return $query->result()[0]->id;
+            return $query->result()[0];
         }
         else
         {

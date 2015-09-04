@@ -26,10 +26,16 @@ class Users extends CI_Controller {
 			{
 				$this->load->model('User');
 				$result = $this->User->validate_user();
-				if($result)
+				if(isset($result->id))
 				{
 					$this->session->set_userdata(array(
-						'user_id'=> $result));
+						'user_id'=> $result->id,
+						'user_name' => $result->user_name
+						));
+					redirect('/home/');
+				}
+				else
+				{
 					redirect('/home/');
 				}
 			}

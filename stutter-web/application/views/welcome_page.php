@@ -22,7 +22,11 @@
           <tr>
             <td><?php echo $result->file_name;?></td>
             <td><?php echo $result->time_stamp;?></td>
-            <td><a href="#">play</a></td>
+            <td>
+              <a href="<?php echo base_url('/home/play').$result->file_name;?>">
+                play
+              </a>
+            </td>
             <td><a href="#">delete</a></td>
           </tr>
  <?php  }?>

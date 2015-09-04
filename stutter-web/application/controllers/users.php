@@ -45,5 +45,18 @@ class Users extends CI_Controller {
 			redirect('/home');
 		}
 	}
+	
+	public function logout()
+	{
+		$result = $this->session->unset_userdata('user_id');
+		if($result)
+		{
+			redirect('/users/login');
+		}
+		else
+		{
+			redirect('/home');
+		}
+	}
 
 }

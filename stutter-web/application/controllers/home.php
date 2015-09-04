@@ -22,8 +22,13 @@ class Home extends CI_Controller {
 	{
 		if($this->session->userdata('user_id'))
 		{
+			$this->load->model('Upload');
+			$data['results'] = $this->Upload->get_user_files();
 			$this->load->view('header');
+			$this->load->view('navbar');
+			$this->load->view('welcome_page',$data);
 			$this->load->view('footer');
+			//var_dump($results);
 		}
 		else
 		{

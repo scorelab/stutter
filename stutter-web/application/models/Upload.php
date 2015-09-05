@@ -1,13 +1,13 @@
 <?php
-//Model for handling users     
-class Upload extends CI_Model 
+//Model for handling users
+class Upload extends CI_Model
 {
 
     function __construct()
     {
         parent::__construct();
     }
-	
+
 	public function save_file($uploader_id,$file_name)
 	{
 		$file = array(
@@ -17,12 +17,13 @@ class Upload extends CI_Model
 
         $this->db->insert('uploads', $file);
 	}
-    
+
     public function get_all_files()
     {
-        # code...
+        $query = $this->db->get('uploads');
+        return $query->result();
     }
-    
+
     public function get_user_files()
     {
         $user = array(
@@ -32,12 +33,12 @@ class Upload extends CI_Model
         $query = $this->db->get('uploads');
         return $query->result();
     }
-    
+
     public function delete_file()
     {
         # code...
     }
-    
+
     public function delete_user_file()
     {
         # code...

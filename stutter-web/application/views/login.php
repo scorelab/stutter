@@ -20,13 +20,8 @@
             <label for="inputPassword"  class="col-lg-2 control-label">Password</label>
             <div class="col-lg-10">
               <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Checkbox
-                </label>
-              </div>
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit">Login</button>
           </div>
         </fieldset>
       </form>

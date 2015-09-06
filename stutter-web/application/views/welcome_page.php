@@ -25,7 +25,7 @@
             <td>
                 <audio src="<?php echo base_url('/home/play').'/'.$result->file_name;?>" controls></audio>
             </td>
-            <td><a href="#">delete</a></td>
+            <td><a href="<?php echo base_url('/home/delete').'/'.$result->file_name;?>">delete</a></td>
           </tr>
  <?php  }?>
         </tbody>

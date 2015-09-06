@@ -34,13 +34,35 @@ class Upload extends CI_Model
         return $query->result();
     }
 
-    public function delete_file()
+    public function auth_file_play($file_name)
     {
-        # code...
+      $user = array(
+          'uploader_id' => $this->session->userdata('user_id'),
+          'file_name'   => $file_name
+      );
+      $this->db->where($user);
+      $query = $this->db->get('uploads');
+      return $query->result();
     }
 
-    public function delete_user_file()
+    public function delete_file($file_name)
     {
-        # code...
+      $file = array(
+          'file_name'   => $file_name
+      );
+      $this->db->where($file);
+      $query = $this->db->delete('uploads');
+      return $query;
+    }
+
+    public function delete_user_file($file_name)
+    {
+      $user = array(
+          'uploader_id' => $this->session->userdata('user_id'),
+          'file_name'   => $file_name
+      );
+      $this->db->where($user);
+      $query = $this->db->delete('uploads');
+      return $query->result();
     }
 }

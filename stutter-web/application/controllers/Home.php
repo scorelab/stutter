@@ -30,6 +30,7 @@ class Home extends CI_Controller
 		}
 		else
 		{
+			$this->session->set_flashdata('logout', 'Logged out');
 			redirect('users/login');
 		}
 	}

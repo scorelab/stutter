@@ -1,5 +1,9 @@
 <div class="container">
   <div class="page-header">
+    <?php echo validation_errors('<p class="alert alert-dismissable alert-danger">'); ?>
+			<?php if($this->session->flashdata('delete')) : ?>
+				<?php echo '<p class="alert alert-dismissable alert-success">' .$this->session->flashdata('delete') . '</p>'; ?>
+			<?php endif; ?>
     <h1 id="navbar">Stutter Aid</h1>
   </div>
   <div class="panel panel-primary">

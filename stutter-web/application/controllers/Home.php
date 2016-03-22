@@ -30,6 +30,7 @@ class Home extends CI_Controller
 		}
 		else
 		{
+			$this->session->set_flashdata('logout', 'Logged out');
 			redirect('users/login');
 		}
 	}
@@ -72,6 +73,7 @@ class Home extends CI_Controller
 	{
 		if($this->session->userdata('user_id'))
 		{
+			$this->session->set_flashdata('delete', 'Audio Deleted');
 			if($this->session->userdata('user_type')==1)
 			{
 				$this->load->model('Upload');

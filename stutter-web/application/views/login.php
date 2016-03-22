@@ -10,6 +10,10 @@
     <div class="col-lg-4 col-lg-offset-4" >
       <form class="form-horizontal" method="post" action="<?php echo base_url('/users/login')?>">
         <fieldset>
+          <?php echo validation_errors('<p class="alert alert-dismissable alert-danger">'); ?>
+			<?php if($this->session->flashdata('logout')) : ?>
+				<?php echo '<p class="alert alert-dismissable alert-success">' .$this->session->flashdata('logout') . '</p>'; ?>
+			<?php endif; ?>
           <div class="form-group">
             <label for="inputEmail" class="col-lg-2 control-label">Email</label>
             <div class="col-lg-10">
